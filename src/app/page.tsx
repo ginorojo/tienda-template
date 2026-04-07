@@ -5,6 +5,9 @@ import { createClient } from '@/utils/supabase/server';
 
 
 
+export const dynamic = "force-dynamic";
+export const runtime = "nodejs";
+
 export default async function Home() {
   const supabase = await createClient();
   
