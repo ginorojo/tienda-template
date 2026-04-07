@@ -77,7 +77,7 @@ export async function POST(req: NextRequest) {
                     .select('*')
                     .eq('order_id', order.id);
 
-                const itemsCount = items?.reduce((acc, item) => acc + item.quantity, 0) || 1;
+                const itemsCount = items?.reduce((acc: number, item: any) => acc + item.quantity, 0) || 1;
 
                 const shipitResult = await createShipitOrder({
                     reference: order.flow_order_id,
