@@ -6,7 +6,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "build:cloudflare": "npx @opennextjs/cloudflare build",
+    "preview:cloudflare": "npm run build:cloudflare && npx wrangler pages dev",
+    "deploy:cloudflare": "npm run build:cloudflare && npx wrangler pages deploy"
   },
   "dependencies": {
     "@supabase/ssr": "^0.10.0",
@@ -22,6 +25,7 @@
     "xlsx": "^0.18.5"
   },
   "devDependencies": {
+    "@opennextjs/cloudflare": "^1.18.0",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
@@ -29,6 +33,7 @@
     "eslint": "^9",
     "eslint-config-next": "16.2.2",
     "tailwindcss": "^4",
-    "typescript": "^5"
+    "typescript": "^5",
+    "wrangler": "^4.81.0"
   }
 }
