@@ -56,7 +56,7 @@ export default function AdminProducts() {
     if (confirm('¿Estás seguro de eliminar este producto?')) {
       const { error } = await supabase.from('products').delete().eq('id', id);
       if (!error) {
-        setProducts(products.filter(p => p.id !== id));
+        setProducts(products.filter((p: any) => p.id !== id));
       }
     }
   }
@@ -84,14 +84,13 @@ export default function AdminProducts() {
       // Obtener SKUs existentes para diferenciar creados vs actualizados
       const { data: existingProducts } = await supabase
         .from('products')
-        .select('sku');
-      
-      const existingSkus = new Set(existingProducts?.map(p => p.sku) || []);
+        
+      const existingSkus = new Set(existingProducts?.map((p: { sku: string }) => p.sku) || []);
       
       let createdCount = 0;
       let updatedCount = 0;
 
-      excelProducts.forEach(p => {
+      excelProducts.forEach((p: ExcelProduct) => {
         if (existingSkus.has(p.sku)) {
           updatedCount++;
         } else {
@@ -128,7 +127,7 @@ export default function AdminProducts() {
     }
   }
 
-  const filteredProducts = products.filter(p => 
+  const filteredProducts = products.filter((p: any) => 
     (p.name?.toLowerCase() || '').includes(searchTerm.toLowerCase()) ||
     (p.sku?.toLowerCase() || '').includes(searchTerm.toLowerCase())
   );

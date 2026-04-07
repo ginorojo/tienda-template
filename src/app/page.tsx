@@ -85,7 +85,7 @@ export default async function Home() {
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-                {products?.map((product) => (
+                {products?.map((product: any) => (
                     <div key={product.id} className="card bg-base-100 shadow-xl group overflow-hidden hover:shadow-2xl transition-all duration-300">
                         <figure className="aspect-[4/5] overflow-hidden relative">
                             <img 
