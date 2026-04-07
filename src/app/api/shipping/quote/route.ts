@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getShipitQuote } from '@/lib/shipping';
 
-export const runtime = "edge";
+
 
 /**
  * Cotizar Envío con Shipit

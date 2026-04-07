@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect } from 'react';
+import React, { useEffect, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { 
   CheckCircle2, 
@@ -12,7 +12,7 @@ import {
 import Link from 'next/link';
 import { useCart } from '@/context/CartContext';
 
-export default function SuccessPage() {
+function SuccessContent() {
   const searchParams = useSearchParams();
   const orderId = searchParams.get('orderId');
   const { clearCart } = useCart();
@@ -72,3 +72,16 @@ export default function SuccessPage() {
     </div>
   );
 }
+
+export default function SuccessPage() {
+  return (
+    <Suspense fallback={
+      <div className="flex items-center justify-center min-h-[80vh]">
+        <span className="loading loading-spinner loading-lg text-primary"></span>
+      </div>
+    }>
+      <SuccessContent />
+    </Suspense>
+  );
+}
+

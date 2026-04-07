@@ -3,7 +3,7 @@ import { createClient } from '@/utils/supabase/server';
 import { createFlowPayment } from '@/lib/flow';
 import { nanoid } from 'nanoid';
 
-export const runtime = "edge";
+
 
 /**
  * Iniciar Pago con Flow y Guardar Orden en Supabase

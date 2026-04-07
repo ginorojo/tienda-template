@@ -3,7 +3,7 @@ import { verifyFlowSignature } from '@/lib/flow';
 import { createClient } from '@/utils/supabase/server';
 import { createShipitOrder } from '@/lib/shipping';
 
-export const runtime = "edge";
+
 
 /**
  * Flow.cl Webhook - Transfiere el control de pago
