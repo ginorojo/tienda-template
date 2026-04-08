@@ -5,6 +5,8 @@ import { updateSession } from '@/utils/supabase/middleware'
  * Next.js 16 Proxy Function
  * Emite headers, redirects y rewrites antes de que la petición llegue al renderizado.
  */
+export const runtime = 'edge';
+
 export async function proxy(request: NextRequest) {
   return await updateSession(request)
 }
