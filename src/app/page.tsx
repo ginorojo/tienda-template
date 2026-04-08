@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { ShoppingCart, ArrowRight, Truck, ShieldCheck, Zap } from 'lucide-react';
 import { createClient } from '@/utils/supabase/server';
 
-export const dynamic = 'force-dynamic';
+
 
 export default async function Home() {
   const supabase = await createClient();

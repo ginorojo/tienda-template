@@ -6,7 +6,6 @@ import { createClient } from '@/utils/supabase/server';
  * Verifica la disponibilidad de variables de entorno y la conexión real a Supabase.
  */
 export const runtime = 'edge';
-export const dynamic = 'force-dynamic';
 
 export async function GET() {
   const diagnostics: any = {
