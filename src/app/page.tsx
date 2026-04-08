@@ -6,20 +6,13 @@ import { createClient } from '@/utils/supabase/server';
 
 
 export default async function Home() {
-  let products: any[] = [];
+  const supabase = await createClient();
   
-  try {
-    const supabase = await createClient();
-    if (supabase && typeof supabase.from === 'function') {
-      const { data } = await supabase
-        .from('products')
-        .select('*')
-        .limit(8);
-      products = data || [];
-    }
-  } catch (err) {
-    console.error("❌ Error recuperando productos en Home:", err);
-  }
+  // Obtener productos destacados de Supabase
+  const { data: products } = await supabase
+    .from('products')
+    .select('*')
+    .limit(8);
 
   return (
     <div className="bg-base-100 flex flex-col min-h-screen">
