@@ -13,6 +13,8 @@ export async function GET() {
       NEXT_PUBLIC_SUPABASE_ANON_KEY: !!process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
       SUPABASE_SERVICE_ROLE_KEY: !!process.env.SUPABASE_SERVICE_ROLE_KEY,
       NODE_ENV: process.env.NODE_ENV,
+      CF_PAGES: !!process.env.CF_PAGES,
+      RUNTIME: typeof (globalThis as any).EdgeRuntime !== 'undefined' ? 'edge' : 'nodejs',
     },
     database: {
       status: 'PENDING',
