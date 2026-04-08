@@ -2,18 +2,20 @@ import { createServerClient } from '@supabase/ssr'
 import { NextResponse, type NextRequest } from 'next/server'
 
 export async function updateSession(request: NextRequest) {
+  // 1. Obtener variables de entorno dentro de la función para asegurar visibilidad en Edge
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+  // 2. Respuesta base
   let supabaseResponse = NextResponse.next({
     request,
   })
 
-  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
-  const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
-
   if (!supabaseUrl || !supabaseAnonKey) {
-    console.error("❌ ERROR MIDDLEWARE: Supabase keys are missing in Runtime Environment Variables!");
     return supabaseResponse;
   }
 
+  // 3. Inicializar el cliente usando el patrón de headers inmutables
   const supabase = createServerClient(supabaseUrl, supabaseAnonKey, {
       cookies: {
         getAll() {
@@ -32,8 +34,12 @@ export async function updateSession(request: NextRequest) {
     }
   )
 
-  // Actualizar la sesión para que el usuario no sea deslogueado
-  await supabase.auth.getUser()
+  // 4. IMPORTANTE: Usar try-catch para evitar que un error de auth mate al middleware
+  try {
+    await supabase.auth.getUser()
+  } catch (e) {
+    console.error("❌ Auth middleware error:", e);
+  }
 
   return supabaseResponse
 }

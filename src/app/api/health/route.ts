@@ -5,6 +5,9 @@ import { createClient } from '@/utils/supabase/server';
  * Endpoint de Auditoría para Cloudflare Pages
  * Verifica la disponibilidad de variables de entorno y la conexión real a Supabase.
  */
+export const runtime = 'edge';
+export const dynamic = 'force-dynamic';
+
 export async function GET() {
   const diagnostics: any = {
     timestamp: new Date().toISOString(),
